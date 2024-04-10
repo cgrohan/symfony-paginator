@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Articles;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -16,9 +17,23 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ArticlesRepository extends ServiceEntityRepository
 {
+    public const PAGINATOR_PER_PAGE = 2;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Articles::class);
+    }
+
+    public function getArticlePaginator(int $offset): Paginator
+    {
+        $query = $this
+                    ->createQueryBuilder('a')
+                    ->setMaxResults(self::PAGINATOR_PER_PAGE)
+                    ->setFirstResult($offset)
+                    ->getQuery()
+        ;
+
+        return new Paginator($query);
     }
 
     //    /**
