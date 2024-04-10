@@ -1,5 +1,23 @@
-{% for article in articles %}
-    <h3>{{ article.name }}</h3>
-    <p>{{ article.content }}</p>
-    <span>{{ article.author }}</span>
-{% endfor %}
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="container text-center">
+    <div class="d-flex justify-content-center">
+        <div class="row">
+            {% for article in articles %}
+            
+                <div class="card" style="width: 33%;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ article.name }}</h5>
+                        <p class="card-text">{{ article.content }}</p>
+                        <span>{{ article.author }}</span>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+    
+{% endblock %}
