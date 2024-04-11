@@ -36,6 +36,15 @@ class ArticlesRepository extends ServiceEntityRepository
         return new Paginator($query);
     }
 
+    public function getArticleKnp()
+    {
+        return $this
+                    ->createQueryBuilder('a')
+                    ->select('a')
+                    ->getDQL()
+        ;
+    }
+
     //    /**
     //     * @return Articles[] Returns an array of Articles objects
     //     */
